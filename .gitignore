@@ -1,33 +1,182 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
 
-# Precompiled Headers
-*.gch
-*.pch
+#include <stdlib.h>
+#include <stdio.h>
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+char vet[9];
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+void nome()
+{
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+	{
+		printf("\t   Jogo da velha#\n");
+	}
+}
+void limpar()
+{
+	for(int x=1;x<=9;x++)
+	{
+		vet[x]=' ';
+	}
+}
+void imprimir()
+{
+	
+	for(int x=1;x<=9;x++)
+	{
+		if(x==4 || x==7)
+		printf("\n");
+		printf("\t[%c]",vet[x]);
+	}
+	printf("\n");
+}
 
-# Debug files
-*.dSYM/
-*.su
+main() 
+
+{
+	int pos,jog=1,jog1=0,jog2=0,velha=0;
+	char sair='n';
+	
+	do
+	{
+		limpar();
+		
+		nome();
+		for(int x=1;x<=9;x++)
+		{
+			system("cls");
+			nome();
+			imprimir();
+			if(jog==1)
+			{
+				printf("\n");
+				printf("\t      JOGADOR 1 [X]\n");
+				printf("\t      Posicao: ");
+				scanf("%d",&pos);
+				if(vet[pos]==' ' && pos>=1 && pos<=9)
+				{
+					vet[pos]='X';
+					jog=2;
+				}
+				else
+				{
+					printf("\n\n\n");
+					printf("\t   Posicao invalida\n");
+					x--;
+					_sleep(2000);
+				}
+				/*Testando velha jog1 na Horizontal*/
+				if((vet[1]=='X' && vet[2]=='X' && vet[3]=='X')||(vet[4]=='X' && vet[5]=='X' && vet[6]=='X')||(vet[7]=='X' && vet[8]=='X' && vet[9]=='X'))
+				{
+					system("cls");
+					imprimir();
+					printf("\n\t  O Jogador 1 venceu o jogo\n");
+					_sleep(2000);
+					jog1++;
+					break;
+					
+				}
+				/*Testando velha jog1 na  Vertical*/
+				if((vet[1]=='X' && vet[4]=='X' && vet[7]=='X')||(vet[2]=='X' && vet[5]=='X' && vet[8]=='X')||(vet[3]=='X' && vet[6]=='X' && vet[9]=='X'))
+				{
+					system("cls");
+					imprimir();
+					printf("\n\t  O Jogador 1 venceu o jogo\n");
+					_sleep(2000);
+					jog1++;
+					break;
+				}	
+				/*Testando velha jog1 na Diagonal*/
+				if((vet[1]=='X' && vet[5]=='X' && vet[9]=='X')||(vet[3]=='X' && vet[5]=='X' && vet[7]=='X'))
+				{
+					system("cls");
+					imprimir();
+					printf("\n\t  O Jogador 1 venceu o jogo\n");
+					_sleep(2000);
+					jog1++;
+					break;
+				}
+			}
+			else if(jog==2)
+			{
+				
+				printf("\n");
+				printf("\t      JOGADOR 2 [O]\n");
+				printf("\t      Posicao: ");
+				scanf("%d",&pos);
+				if(vet[pos]==' ' && pos>=1 && pos<=9)
+				{
+					vet[pos]='O';
+					jog=1;
+				}
+				else
+				{
+					printf("\n\n\n");
+					printf("\t    Posicao invalida\n");
+					x--;
+					_sleep(2000);
+				}
+				/*Testando velha do jog2 na Horizontal*/
+				if((vet[1]=='O' && vet[2]=='O' && vet[3]=='O')||(vet[4]=='O' && vet[5]=='O' && vet[6]=='O')||(vet[7]=='O' && vet[8]=='O' && vet[9]=='O'))
+				{
+					system("cls");
+					imprimir();
+					printf("\n\t  O Jogador 2 venceu o jogo\n");
+					_sleep(2000);
+					jog2++;
+					break;
+				}
+				/*Testando velha jog2 na Vertical*/
+				if((vet[1]=='O' && vet[4]=='O' && vet[7]=='O')||(vet[2]=='O' && vet[5]=='O' && vet[8]=='O')||(vet[3]=='O' && vet[6]=='O' && vet[9]=='O'))
+				{
+					system("cls");
+					imprimir();
+					printf("\n\t  O Jogador 2 venceu o jogo\n");
+					_sleep(2000);
+					jog2++;
+					break;
+				}
+				/*Testando velha jog2  na Diagonal*/
+				if((vet[1]=='O' && vet[5]=='O' && vet[9]=='O')||(vet[3]=='O' && vet[5]=='O' && vet[7]=='O'))
+				{
+					system("cls");
+					imprimir();
+					printf("\n\t  O Jogador 2 venceu o jogo\n");
+					_sleep(2000);
+					jog2++;
+					break;
+				}
+				
+			}
+			if(x==9)
+			{
+				system("cls");
+				imprimir();
+				printf("\t   Jogo Empatado !");
+				velha++;
+				_sleep(2000);
+				
+				break;
+			}
+			
+			
+		}
+	
+		jog=1;	
+		printf("\t\n  Deseja sair? \n's' sair ou 'n' Continuar ?");
+		
+		scanf("%s",&sair);
+		
+		
+
+		
+	}while(sair!='s');
+	
+		printf("O Jogador 1 ganhou: %d \n", jog1);
+		
+		printf("O Jogador 2 ganhou: %d\n", jog2);
+			
+		printf("Quantidade de velha : %d \n",velha);
+		_sleep(2000);
+		
+
+}
